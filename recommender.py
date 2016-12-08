@@ -3,6 +3,7 @@ from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 db = client.reddit
 
+# Note: the data must be imported to a local MongoDB database for this code to work.
 comments100      = db.comments100
 comments100000   = db.comments100000
 comments1000000  = db.comments1000000
@@ -14,9 +15,9 @@ db.comments = comments10000000
 def similar_subreddits(subreddit):
     # Get the authors of this subreddit.
     result = db.subredditcommenters.find({"subreddit": subreddit})
-    if result.count() == 0:
-        print "The subreddit '/r/%s' does not exist in the dataset." % subreddit
-        return
+
+    if result.count() == 0: return None
+
     authors = result.next()["authors"]
 
     # Compute similarity scores for each other subreddit.
@@ -40,11 +41,10 @@ def similar_subreddits(subreddit):
         {"$limit": 15}
     ])
 
-    print "Subreddits similar to /r/%s:" % subreddit
-    for subreddit in similarity_scores:
-        print "\t%.4f\t/r/%s" % (subreddit["similarity"], subreddit["subreddit"])
+    return [{"subreddit": subreddit["subreddit"], "similarity": subreddit["similarity"]} for subreddit in similarity_scores]
 
-def similarity_by_commenters():
+
+def precompute():
     # Make a list of commenters in each subreddit.
     commenters_per_subreddit = db.comments.aggregate([
         {"$group": {"_id": "$subreddit", "authors": {"$addToSet": "$author"}}},
@@ -56,6 +56,11 @@ def similarity_by_commenters():
     ])
 
 if __name__ == "__main__":
-    similarity_by_commenters()
-
-    similar_subreddits("cycling")
+    subreddit = raw_input("Enter a subreddit: ")
+    similar = similar_subreddits(subreddit)
+    if similar:
+        print "Subreddits similar to %s:" % subreddit
+        for sr in similar:
+            print "\t%f\t%s" % (sr["similarity"], sr["subreddit"])
+    else:
+        print "There are no comments in the dataset for %s." % subreddit

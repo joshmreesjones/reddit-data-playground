@@ -3,13 +3,14 @@ from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 db = client.reddit
 
+# Note: the data must be imported to a local MongoDB database for this code to work.
 comments100      = db.comments100
 comments100000   = db.comments100000
 comments1000000  = db.comments1000000
 comments10000000 = db.comments10000000
 commentsall      = db.commentsall
 
-db.comments = comments1000000
+db.comments = comments10000000
 
 def exploratory_stats():
     # How many comments are there?
@@ -63,7 +64,7 @@ def exploratory_stats():
     # Rank the subreddits by average comment length.
     # Rank the subreddits by average sentence length.
     # Rank the subreddits by average number of upvotes per comment
-    # Rank commenters by number of comments they've submitted. What percentage of comments are created by the top X% of these commenters?
+    # Rank authors by number of comments they've submitted. What percentage of comments are created by the top X% of these commenters?
     # What are the most common comments?
     # What users have the highest average number of upvotes per comment?
     # Make a list of words and their frequencies (also know how many total words there are in the corpus).
