@@ -1,2 +1,4 @@
 pymongo
-pip==9.0.1
+pip
+flask
+flask-restful

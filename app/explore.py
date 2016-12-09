@@ -8,7 +8,7 @@ comments100      = db.comments100
 comments100000   = db.comments100000
 comments1000000  = db.comments1000000
 comments10000000 = db.comments10000000
-commentsall      = db.commentsall
+commentsall      = db.comments
 
 db.comments = comments10000000
 
