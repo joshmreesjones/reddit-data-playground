@@ -16,4 +16,6 @@ Recommender
 Website
 -------
 
-> To do: make a website with a graph-based stats and recommendations explorer
+Use the recommender yourself here:
+
+> (Click here)[152.46.20.254]
