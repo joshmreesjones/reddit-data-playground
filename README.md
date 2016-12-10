@@ -19,5 +19,3 @@ Website
 Use the recommender yourself here:
 
 > (Click here)[152.46.20.254]
-
-Making a change to test post-receive hook.
