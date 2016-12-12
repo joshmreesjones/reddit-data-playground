@@ -18,4 +18,4 @@ Website
 
 Use the recommender yourself here:
 
-> (Click here)[152.46.20.254]
+> [152.46.20.254](http://152.46.20.254/)
