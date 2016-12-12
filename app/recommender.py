@@ -10,7 +10,7 @@ comments1000000  = db.comments1000000
 comments10000000 = db.comments10000000
 commentsall      = db.commentsall
 
-db.comments = comments10000000
+#db.comments = comments10000000
 
 def similar_subreddits(subreddit):
     # Get the authors of this subreddit.
@@ -60,7 +60,10 @@ def precompute():
         {"$match": {"count": {"$gte": 100}}},
         {"$project": {"_id": 0, "subreddit": "$_id", "authors": 1, "count": 1}},
         {"$out": "subredditcommenters"}
-    ])
+    ],
+    {
+        "allowDiskUse": True
+    })
 
 if __name__ == "__main__":
     subreddit = raw_input("Enter a subreddit: ")
