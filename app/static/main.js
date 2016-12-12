@@ -1,17 +1,21 @@
-$("#subreddit-submit").click(function() {
+var handleSubmit = function() {
     var subreddit = $("#subreddit-input").val();
 
     if (subreddit == "") return;
+
+    $(".loader").show();
 
     var result = $.ajax({
         url: "/similar/" + subreddit,
         cache: false,
         success: handleResponse
     });
-});
+};
 
 var handleResponse = function(response) {
+    $(".loader").hide();
+
     console.log(response);
-    // If the graph is new, just make the graph
-    // If an existing graph is being expanded, update the graph
 }
+
+$("#subreddit-submit").click(handleSubmit);

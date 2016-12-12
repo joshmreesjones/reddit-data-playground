@@ -17,11 +17,11 @@ html, body {
     text-align: center;
 }
 
-#input {
+#page #input {
     flex: 0 1 auto;
 }
 
-#graph {
+#page #graph {
     flex: 1 1 auto;
 
     margin: 40px;
