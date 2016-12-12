@@ -24,6 +24,7 @@ def similar_subreddits(subreddit):
     similarity_scores = db.subredditcommenters.aggregate([
         {"$project": {
             "subreddit": True,
+            "count": True,
             "similarity": {
                 "$divide": [
                     {"$size": {"$setIntersection": [authors, "$authors"]}},
@@ -41,7 +42,13 @@ def similar_subreddits(subreddit):
         {"$limit": 15}
     ])
 
-    return [{"subreddit": subreddit["subreddit"], "similarity": subreddit["similarity"]} for subreddit in similarity_scores]
+    return [
+        {
+            "subreddit": subreddit["subreddit"],
+            "count": subreddit["count"],
+            "similarity": subreddit["similarity"]
+        } for subreddit in similarity_scores
+    ]
 
 
 def precompute():
@@ -61,6 +68,6 @@ if __name__ == "__main__":
     if similar:
         print "Subreddits similar to %s:" % subreddit
         for sr in similar:
-            print "\t%f\t%s" % (sr["similarity"], sr["subreddit"])
+            print "\t%d\t%f\t%s" % (sr["count"], sr["similarity"], sr["subreddit"])
     else:
         print "There are no comments in the dataset for %s." % subreddit
