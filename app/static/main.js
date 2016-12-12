@@ -1,9 +1,17 @@
 $("#subreddit-submit").click(function() {
     var subreddit = $("#subreddit-input").val();
-    similar = similarSubreddits(subreddit);
+
+    if (subreddit == "") return;
+
+    var result = $.ajax({
+        url: "/similar/" + subreddit,
+        cache: false,
+        success: handleResponse
+    });
 });
 
-var similarSubreddits = function(subreddit) {
-    console.log("Finding some similar subreddits to " + subreddit);
-    return null;
+var handleResponse = function(response) {
+    console.log(response);
+    // If the graph is new, just make the graph
+    // If an existing graph is being expanded, update the graph
 }

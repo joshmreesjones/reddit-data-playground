@@ -1,4 +1,6 @@
+import dataset
 import os
+
 from config import config
 from flask import Flask, jsonify, render_template
 
@@ -13,7 +15,8 @@ def index():
 @app.route('/similar/<string:subreddit>')
 def test(subreddit):
     # TODO: cache this query somewhere so it's faster in the future
-    return jsonify({"foo": subreddit})
+    data = dataset.similar_subreddits(subreddit)
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run()
