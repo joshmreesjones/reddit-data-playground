@@ -53,17 +53,16 @@ def similar_subreddits(subreddit):
 
 def precompute():
     # Make a list of commenters in each subreddit.
-    commenters_per_subreddit = db.comments.aggregate([
+    pipeline = [
         {"$group": {"_id": "$subreddit", "authors": {"$addToSet": "$author"}}},
         {"$unwind": "$authors"},
         {"$group": {"_id": "$_id", "authors": {"$addToSet": "$authors"}, "count": {"$sum": 1}}},
         {"$match": {"count": {"$gte": 100}}},
         {"$project": {"_id": 0, "subreddit": "$_id", "authors": 1, "count": 1}},
         {"$out": "subredditcommenters"}
-    ],
-    {
-        "allowDiskUse": True
-    })
+    ]
+
+    db.comments.aggregate(pipeline, allowDiskUse=True)
 
 if __name__ == "__main__":
     subreddit = raw_input("Enter a subreddit: ")
