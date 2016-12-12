@@ -57,4 +57,8 @@ def similar_subreddits(subreddit):
                        "count": sr["count"],
                        "similarity": sr["similarity"]}
 
-    return [data(subreddit) for subreddit in similarity_scores]
+    return {
+        "similar_to": subreddit,
+        "count": len(authors),
+        "recommendations": [data(subreddit) for subreddit in similarity_scores]
+    }

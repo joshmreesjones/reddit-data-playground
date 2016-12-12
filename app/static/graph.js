@@ -9,9 +9,7 @@ var simulation = d3.forceSimulation()
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
 
-d3.json("miserables.json", function(error, graph) {
-    if (error) throw error;
-
+var updateGraph = function(graph) {
     var link = svg.append("g")
         .attr("class", "links")
         .selectAll("line")
@@ -57,7 +55,7 @@ d3.json("miserables.json", function(error, graph) {
 
         node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
     }
-});
+}
 
 function dragstarted(d) {
     if (!d3.event.active) simulation.alphaTarget(0.3).restart();
