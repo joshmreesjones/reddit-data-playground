@@ -1,6 +1,10 @@
+import os
+from config import config
 from flask import Flask, jsonify, render_template
 
 app = Flask(__name__)
+config_name = os.getenv('FLASK_CONFIG') or 'default'
+app.config.from_object(config[config_name])
 
 @app.route('/')
 def index():
@@ -12,4 +16,4 @@ def test(subreddit):
     return jsonify({"foo": subreddit})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
