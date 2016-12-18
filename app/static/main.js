@@ -7,7 +7,6 @@ var handleSubmit = function() {
 
     var result = $.ajax({
         url: "/similar/" + subreddit,
-        cache: false,
         success: handleResponse
     });
 };
