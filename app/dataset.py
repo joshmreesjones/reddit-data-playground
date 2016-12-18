@@ -62,3 +62,9 @@ def similar_subreddits(subreddit):
         "count": len(authors),
         "recommendations": [data(subreddit) for subreddit in similarity_scores]
     }
+
+if __name__ == "__main__":
+    subreddit = raw_input("Enter a subreddit: ")
+    results = similar_subreddits(subreddit)
+    for sr in results["recommendations"]:
+        print "\t%d\t%f\t%s" % (sr["count"], sr["similarity"], sr["subreddit"])
