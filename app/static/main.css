@@ -2,37 +2,53 @@
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-}
-
 h1 {
     color: #888888;
 }
 
-#page {
-    display: flex;
-    flex-flow: column;
+html, body {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
 
-    width: 80%;
-    margin: 0 auto;
-
+#header {
     text-align: center;
 }
 
-#page #input {
-    flex: 0 1 auto;
+#header h1,
+#header form {
+    margin: 15px;
 }
 
-#page #graph {
-    flex: 1 1 auto;
+#header input {
+    display: inline-block;
+    vertical-align: top;
 
-    margin: 40px;
+    /* PureCSS adds margin-bottom: 0.3em to the input when the screen
+     * size is < 480px, which caused the header height to jump. */
+    margin-bottom: 0.3em;
+}
 
+#graph {
+    flex-grow: 1;
+    display: flex;
     background-color: #f5f5f5;
 
     -webkit-box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,0.21);
        -moz-box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,0.21);
             box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,0.21);
+}
+
+#graph svg {
+    width: 100%;
+}
+
+#graph .loader {
+    position: absolute;
+    margin: auto;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
 }

@@ -17,21 +17,19 @@
     </head>
 
     <body>
-        <div id="page">
-            <div id="input">
-                <h1>Subreddit Recommender</h1>
+        <div id="header">
+            <h1>Subreddit Recommender</h1>
 
-                <form class="pure-form" onsubmit="event.preventDefault();">
-                    <input id="subreddit-input" type="text" placeholder="Subreddit name">
-                    <button id="subreddit-submit" class="pure-button pure-button-primary">Submit</button>
-                </form>
-            </div>
+            <form class="pure-form" onsubmit="event.preventDefault();">
+                <input id="subreddit-input" type="text" placeholder="Subreddit name">
+                <button id="subreddit-submit" class="pure-button pure-button-primary">Submit</button>
+            </form>
+        </div>
 
-            <div id="graph">
-                <div class="loader" style="display: none"></div>
+        <div id="graph">
+            <div class="loader" style="display: none"></div>
 
-                <svg width="960" height="600"></svg>
-            </div>
+            <svg></svg>
         </div>
 
         <script type="text/javascript" src="/static/lib/jquery.js"></script>

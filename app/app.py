@@ -14,7 +14,6 @@ def index():
 
 @app.route('/similar/<string:subreddit>')
 def test(subreddit):
-    # TODO: cache this query somewhere so it's faster in the future
     data = dataset.similar_subreddits(subreddit)
     return jsonify(data)
 
